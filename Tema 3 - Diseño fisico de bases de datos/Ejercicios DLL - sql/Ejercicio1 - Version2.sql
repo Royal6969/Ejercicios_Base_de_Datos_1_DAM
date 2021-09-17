@@ -1,0 +1,33 @@
+CREATE TABLE ALUMNO (
+NumMatricula INT PRIMARY KEY, --NOT NULL, 
+Nombre varchar2(15), 
+FechaNacimiento date, 
+Telefono number(10)
+);
+
+CREATE TABLE RECIBE (
+NumMatricula INT, FOREIGN KEY (NumMatricula) REFERENCES ALUMNO (NumMatricula), 
+CodAsignatura INT, FOREIGN KEY (CodAsignatura) REFERENCES ASIGNATURA (CodAsignatura),
+CursoEscolar INT PRIMARY KEY --NOT NULL
+);
+
+CREATE TABLE ASIGNATURA (
+CodAsignatura INT PRIMARY KEY, --NOT NULL, 
+Nombre varchar2(15), 
+IDprofesor INT, FOREIGN KEY (IDprofesor) REFERENCES PROFESOR (IDprofesor) 
+);
+
+CREATE TABLE PROFESOR (
+IDprofesor INT PRIMARY KEY, --NOT NULL, 
+NIF_P varchar2(9), 
+Nombre varchar2(15), 
+Especialidad varchar2(20), 
+Telefono number(10)
+);
+
+ALTER TABLE RECIBE ADD CONSTRAINT FOREIGN KEY (NumMatricula) REFERENCES ALUMNO ON DELETE CASCADE;
+
+ALTER TABLE RECIBE ADD CONSTRAINT FOREIGN KEY (CosAsignatura) REFERENCES ASIGNATURA ON DELETE CASCADE;
+
+DROP TABLE PROFESOR CASCADE CONSTRAINTS PURGE;
+
